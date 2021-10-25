@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/25 11:27:59 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/25 11:31:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_struct(t_philo *philo, char **argv, int argc)
 	philo->time_to_eat = ft_atou(argv[3], philo);
 	philo->time_to_sleep = ft_atou(argv[4], philo);
 	if (argc == 6)
-		philo->number_of_times_each_philosopher_must_eat = ft_atou(argv[5], philo);
+		philo->min_number_of_eat = ft_atou(argv[5], philo);
 	else
-		philo->number_of_times_each_philosopher_must_eat = 0;
+		philo->min_number_of_eat = 0;
 }

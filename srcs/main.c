@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/25 11:16:02 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/25 11:29:54 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_philo	*philo;
-		
+
 	if (argc == 5 || argc == 6)
 	{
 		philo = malloc(sizeof(t_philo));
