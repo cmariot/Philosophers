@@ -6,11 +6,23 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/25 11:29:54 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/26 07:00:33 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+void	create_threads(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	while (i < philo->number_of_philosophers)
+	{
+		printf("Philosopher %d created\n", i + 1);
+		i++;
+	}
+}
 
 int	main(int argc, char **argv)
 {
@@ -26,6 +38,7 @@ int	main(int argc, char **argv)
 		}
 		init_struct(philo, argv, argc);
 		printf("Success\n");
+		create_threads(philo);
 		free(philo);
 		return (0);
 	}
