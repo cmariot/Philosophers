@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/25 11:31:50 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/26 20:36:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ unsigned int	ft_atou(char *str, t_philo *philo)
 void	init_struct(t_philo *philo, char **argv, int argc)
 {
 	philo->number_of_philosophers = ft_atou(argv[1], philo);
+	philo->number_of_forks = philo->number_of_philosophers;
 	philo->time_to_die = ft_atou(argv[2], philo);
 	philo->time_to_eat = ft_atou(argv[3], philo);
 	philo->time_to_sleep = ft_atou(argv[4], philo);
@@ -59,4 +60,10 @@ void	init_struct(t_philo *philo, char **argv, int argc)
 		philo->min_number_of_eat = ft_atou(argv[5], philo);
 	else
 		philo->min_number_of_eat = 0;
+	if (philo->number_of_philosophers < 1)
+	{
+		printf("Error, not enought philosophers\n");
+		free(philo);
+		exit(EXIT_FAILURE);
+	}
 }
