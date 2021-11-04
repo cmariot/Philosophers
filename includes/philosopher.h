@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/26 20:39:36 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/04 15:54:22 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,27 @@
 # include <pthread.h>
 
 typedef struct s_philo {
-	int	number_of_philosophers;
-	int	number_of_forks;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	min_number_of_eat;
+	pthread_t	philo_thread;
+	int			id;
+	int			number_of_philosophers;
+	int			number_of_forks;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			min_number_of_eat;
 }	t_philo;
 
+typedef struct s_rules {
+	int		number_of_philosophers;
+	int		number_of_forks;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		min_number_of_eat;
+	t_philo	*philo;
+}	t_rules;
+
 int		main(int argc, char **argv);
-void	init_struct(t_philo *philo, char **argv, int argc);
+void	init_rules(t_rules *rules, char **argv, int argc);
 
 #endif

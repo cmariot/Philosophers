@@ -6,68 +6,60 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/26 22:18:28 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/04 17:23:29 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-void	*philo_thread(void *str)
+void	*new_thread(void *philo_add)
 {
-	int	i;
+	t_philo *philo;
 
-	i = 0;
-	printf("Test %p\n", str);
+	philo = (t_philo *)philo_add;
+	printf("Philosopher created, his ID is %d\n", philo->id);
 	while (1)
 	{
 	}
-	pthread_detach(str);
 	return (NULL);
 }
 
-void	create_threads(t_philo *philo, char **argv)
+void	create_threads(t_rules *rules)
 {
-	pthread_t	*thread;
-	int			i;
-	void		*test;
+	int	i;
 
-	thread = malloc(sizeof(pthread_t) * philo->number_of_philosophers);
-	if (!thread)
-	{
-		printf("Error, cannot create threads\n");
-		free(philo);
-		exit(EXIT_FAILURE);
-	}
+	//Create a thread for each philosopher
+	printf("Creation des threads pour chaque philosopher\n");
 	i = 0;
-	while (i < philo->number_of_philosophers)
+	while (i < rules->number_of_philosophers)
 	{
-		test = argv[i + 1];
-		pthread_create(&thread[i], NULL, philo_thread, &test);
-		printf("Philosopher %d created\n", i + 1);
-		test = NULL;
+		pthread_create(&rules->philo[i].philo_thread, NULL, new_thread, &rules->philo[i]);
 		i++;
 	}
-	while (1)
+	//Wait the end of the threads
+	i = 0;
+	while (i < rules->number_of_philosophers)
 	{
+		pthread_join(rules->philo[i].philo_thread, NULL);
+		i++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philo;
+	t_rules	*rules;
 
 	if (argc == 5 || argc == 6)
 	{
-		philo = malloc(sizeof(t_philo));
-		if (!philo)
+		rules = malloc(sizeof(t_rules));
+		if (!rules)
 		{
-			printf("Error : Malloc philo int main()\n");
+			printf("Error : Malloc rules in main()\n");
 			return (-1);
 		}
-		init_struct(philo, argv, argc);
-		printf("Success\n");
-		create_threads(philo, argv);
-		free(philo);
+		init_rules(rules, argv, argc);
+		create_threads(rules);
+		free(rules);
 		return (0);
 	}
 	else
