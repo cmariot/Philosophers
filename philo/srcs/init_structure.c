@@ -6,11 +6,19 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/04 15:51:53 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/16 13:13:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+size_t	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 
 void	atou_errors(int ref, t_rules *rules)
 {
@@ -64,12 +72,8 @@ void	init_philo(t_rules *rules)
 	while (i < rules->number_of_philosophers)
 	{
 		rules->philo[i].id = i + 1;
-		rules->philo[i].number_of_philosophers = rules->number_of_philosophers;
-		rules->philo[i].number_of_forks = rules->number_of_forks;
-		rules->philo[i].time_to_die = rules->time_to_die;
-		rules->philo[i].time_to_eat = rules->time_to_eat;
-		rules->philo[i].time_to_sleep = rules->time_to_sleep;
-		rules->philo[i].min_number_of_eat = rules->min_number_of_eat;
+		rules->philo[i].rules = rules;
+		rules->philo[i].is_alive = 1;
 		i++;
 	}
 }
@@ -91,5 +95,6 @@ void	init_rules(t_rules *rules, char **argv, int argc)
 		free(rules);
 		exit(EXIT_FAILURE);
 	}
+	rules->init_time = get_time();
 	init_philo(rules);
 }

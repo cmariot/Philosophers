@@ -6,11 +6,19 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/04 17:23:29 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/17 13:15:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+int	is_alive(t_philo *philo)
+{
+	if (philo->is_alive == 1)
+		return (1);
+	else
+		return (0);
+}
 
 void	*new_thread(void *philo_add)
 {
@@ -18,8 +26,20 @@ void	*new_thread(void *philo_add)
 
 	philo = (t_philo *)philo_add;
 	printf("Philosopher created, his ID is %d\n", philo->id);
-	while (1)
+	while (is_alive(philo))
 	{
+		//Take the left fork
+		//Take the right fork
+		//Eat (time_to_eat)
+		//Drop forks
+		//Sleep (time_to_sleep)
+		//Think
+		if (philo->id == 1)
+		{
+			usleep(1000000);
+			printf("philo 1 is dead\n");
+			philo->is_alive = 0;
+		}
 	}
 	return (NULL);
 }
@@ -29,18 +49,21 @@ void	create_threads(t_rules *rules)
 	int	i;
 
 	//Create a thread for each philosopher
-	printf("Creation des threads pour chaque philosopher\n");
 	i = 0;
 	while (i < rules->number_of_philosophers)
 	{
-		pthread_create(&rules->philo[i].philo_thread, NULL, new_thread, &rules->philo[i]);
+		pthread_create(&rules->philo[i].philo_thread, NULL, &new_thread, &rules->philo[i]);
 		i++;
 	}
 	//Wait the end of the threads
 	i = 0;
 	while (i < rules->number_of_philosophers)
 	{
-		pthread_join(rules->philo[i].philo_thread, NULL);
+		int test;
+
+		test = pthread_join(rules->philo[i].philo_thread, NULL);
+		if (test == 0)
+			break ;
 		i++;
 	}
 }
