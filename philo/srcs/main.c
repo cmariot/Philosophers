@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/17 13:15:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/17 13:44:55 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ void	create_threads(t_rules *rules)
 	}
 }
 
+void *free_rules(t_rules **rules)
+{
+	free((*rules)->philo);
+	(*rules)->philo = NULL;
+	free(*rules);
+	*rules = NULL;
+	return (NULL);
+}
+
 int	main(int argc, char **argv)
 {
 	t_rules	*rules;
@@ -82,7 +91,7 @@ int	main(int argc, char **argv)
 		}
 		init_rules(rules, argv, argc);
 		create_threads(rules);
-		free(rules);
+		free_rules(&rules);
 		return (0);
 	}
 	else
