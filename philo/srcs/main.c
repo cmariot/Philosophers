@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 09:11:39 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 09:23:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	*new_thread(void *philo_add)
 void	create_threads(t_rules *rules)
 {
 	int	i;
-	int	j;
 
 	//Create a thread for each philosopher
 	i = 0;
@@ -78,19 +77,6 @@ void	create_threads(t_rules *rules)
 		test = pthread_join(rules->philo[i].philo_thread, NULL);
 		if (test == 0)
 			break ;
-		i++;
-	}
-	// TEST : Free the threads ?
-	j = 0;
-	while (j < i)
-	{
-		pthread_join(rules->philo[j].philo_thread, NULL);
-		j++;
-	}
-	i++;
-	while (i < rules->number_of_philosophers)
-	{
-		pthread_join(rules->philo[i].philo_thread, NULL);
 		i++;
 	}
 }
