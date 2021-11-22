@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/17 13:44:55 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 09:11:39 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,34 @@ int	is_alive(t_philo *philo)
 void	*new_thread(void *philo_add)
 {
 	t_philo *philo;
+	int	timestamp;
 
 	philo = (t_philo *)philo_add;
 	printf("Philosopher created, his ID is %d\n", philo->id);
 	while (is_alive(philo))
 	{
 		//Take the left fork
+		timestamp = get_time() - philo->rules->init_time;
+		printf("%d %d has taken a fork\n", timestamp, philo->id);
 		//Take the right fork
+		timestamp = get_time() - philo->rules->init_time;
+		printf("%d %d has taken a fork\n", timestamp, philo->id);
 		//Eat (time_to_eat)
-		//Drop forks
+		timestamp = get_time() - philo->rules->init_time;
+		printf("%d %d is eating\n", timestamp, philo->id);
+		usleep(philo->rules->time_to_eat);
 		//Sleep (time_to_sleep)
+		timestamp = get_time() - philo->rules->init_time;
+		printf("%d %d is sleeping\n", timestamp, philo->id);
+		usleep(philo->rules->time_to_sleep);
 		//Think
+		timestamp = get_time() - philo->rules->init_time;
+		printf("%d %d is thinking\n", timestamp, philo->id);
 		if (philo->id == 1)
 		{
 			usleep(1000000);
-			printf("philo 1 is dead\n");
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d died\n", timestamp, philo->id);
 			philo->is_alive = 0;
 		}
 	}
@@ -47,6 +60,7 @@ void	*new_thread(void *philo_add)
 void	create_threads(t_rules *rules)
 {
 	int	i;
+	int	j;
 
 	//Create a thread for each philosopher
 	i = 0;
@@ -64,6 +78,19 @@ void	create_threads(t_rules *rules)
 		test = pthread_join(rules->philo[i].philo_thread, NULL);
 		if (test == 0)
 			break ;
+		i++;
+	}
+	// TEST : Free the threads ?
+	j = 0;
+	while (j < i)
+	{
+		pthread_join(rules->philo[j].philo_thread, NULL);
+		j++;
+	}
+	i++;
+	while (i < rules->number_of_philosophers)
+	{
+		pthread_join(rules->philo[i].philo_thread, NULL);
 		i++;
 	}
 }

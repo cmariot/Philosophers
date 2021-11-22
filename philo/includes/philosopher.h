@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/16 13:13:37 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 09:05:22 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <pthread.h>
 # include <unistd.h>
 # include <sys/time.h>
+# include <pthread.h>
 
 typedef struct s_philo {
 	pthread_t		philo_thread;
@@ -39,5 +40,6 @@ typedef struct s_rules {
 
 int		main(int argc, char **argv);
 void	init_rules(t_rules *rules, char **argv, int argc);
+size_t	get_time(void);
 
 #endif
