@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/11/04 12:20:24 by cmariot          ###   ########.fr        #
+#    Updated: 2021/11/22 11:45:01 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ all : $(NAME)
 # Compiling
 $(OBJS_DIR)%.o : %.c
 		@mkdir -p $(OBJS_DIR)
-		@$(CC) $(CFLAGS) -D_REENTRANT -c $< -o $@
+		@$(CC) $(CFLAGS) -pthread -c $< -o $@
 		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
 
 srcs_compil :
@@ -84,7 +84,7 @@ srcs_compil :
 $(NAME)	: srcs_compil $(SRCS) $(OBJS)
 		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
 		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(LIB_LFLAGS) $(RC)\n"
-		@$(CC) $(LFLAGS) $(OBJS) -lpthread -o $(NAME)
+		@$(CC) $(LFLAGS) $(OBJS) -pthread -o $(NAME)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
 
 # Check 42 norm 

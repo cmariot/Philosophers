@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 11:07:40 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 12:08:52 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ void	*new_thread(void *philo_add)
 		//Take the left fork
 		if (philo->rules->a_philo_died == 0)
 		{
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d has taken a fork\n", timestamp, philo->id);
+			if (pthread_mutex_lock(philo->left_fork))
+			{
+				pthread_mutex_lock(philo->rules->philo[philo->id - 1].right_fork);
+				timestamp = get_time() - philo->rules->init_time;
+				printf("%d %d has taken a fork\n", timestamp, philo->id);
+			}
 		}
 		//Take the right fork
 		if (philo->rules->a_philo_died == 0)
@@ -70,6 +74,7 @@ void	*new_thread(void *philo_add)
 			philo->rules->a_philo_died = 1;
 		}
 	}
+	printf("EXIT\n");
 	return (NULL);
 }
 

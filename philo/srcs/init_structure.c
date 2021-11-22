@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 10:50:54 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 12:07:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,10 @@ void	init_philo(t_rules *rules)
 		rules->philo[i].id = i + 1;
 		rules->philo[i].rules = rules;
 		rules->philo[i].is_alive = 1;
+		rules->philo[i].left_fork = malloc(sizeof(pthread_mutex_t));
+		rules->philo[i].right_fork = malloc(sizeof(pthread_mutex_t));
+		rules->philo[i].left_fork = PTHREAD_MUTEX_INITIALIZER;
+		rules->philo[i].right_fork = PTHREAD_MUTEX_INITIALIZER;
 		i++;
 	}
 }
