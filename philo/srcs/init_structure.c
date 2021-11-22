@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/17 13:43:40 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 10:50:54 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	init_rules(t_rules *rules, char **argv, int argc)
 		rules->min_number_of_eat = ft_atou(argv[5], rules);
 	else
 		rules->min_number_of_eat = 0;
+	rules->a_philo_died = 0;
 	if (rules->number_of_philosophers < 1)
 	{
 		printf("Error, not enought philosophers\n");

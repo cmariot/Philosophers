@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 09:23:49 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 11:07:40 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_alive(t_philo *philo)
 {
-	if (philo->is_alive == 1)
+	if (philo->is_alive == 1 || philo->rules->a_philo_died == 0)
 		return (1);
 	else
 		return (0);
@@ -30,28 +30,44 @@ void	*new_thread(void *philo_add)
 	while (is_alive(philo))
 	{
 		//Take the left fork
-		timestamp = get_time() - philo->rules->init_time;
-		printf("%d %d has taken a fork\n", timestamp, philo->id);
+		if (philo->rules->a_philo_died == 0)
+		{
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d has taken a fork\n", timestamp, philo->id);
+		}
 		//Take the right fork
-		timestamp = get_time() - philo->rules->init_time;
-		printf("%d %d has taken a fork\n", timestamp, philo->id);
+		if (philo->rules->a_philo_died == 0)
+		{
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d has taken a fork\n", timestamp, philo->id);
+		}
 		//Eat (time_to_eat)
-		timestamp = get_time() - philo->rules->init_time;
-		printf("%d %d is eating\n", timestamp, philo->id);
-		usleep(philo->rules->time_to_eat);
+		if (philo->rules->a_philo_died == 0)
+		{
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d is eating\n", timestamp, philo->id);
+			usleep(philo->rules->time_to_eat);
+		}
 		//Sleep (time_to_sleep)
-		timestamp = get_time() - philo->rules->init_time;
-		printf("%d %d is sleeping\n", timestamp, philo->id);
-		usleep(philo->rules->time_to_sleep);
+		if (philo->rules->a_philo_died == 0)
+		{
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d is sleeping\n", timestamp, philo->id);
+			usleep(philo->rules->time_to_sleep);
+		}
 		//Think
-		timestamp = get_time() - philo->rules->init_time;
-		printf("%d %d is thinking\n", timestamp, philo->id);
+		if (philo->rules->a_philo_died == 0)
+		{
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d is thinking\n", timestamp, philo->id);
+		}
 		if (philo->id == 1)
 		{
 			usleep(1000000);
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d died\n", timestamp, philo->id);
 			philo->is_alive = 0;
+			philo->rules->a_philo_died = 1;
 		}
 	}
 	return (NULL);
@@ -71,14 +87,8 @@ void	create_threads(t_rules *rules)
 	//Wait the end of the threads
 	i = 0;
 	while (i < rules->number_of_philosophers)
-	{
-		int test;
-
-		test = pthread_join(rules->philo[i].philo_thread, NULL);
-		if (test == 0)
+		if (pthread_join(rules->philo[i++].philo_thread, NULL) == 0)
 			break ;
-		i++;
-	}
 }
 
 void *free_rules(t_rules **rules)

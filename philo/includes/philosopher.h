@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 09:05:22 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 10:50:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_rules {
 	int		min_number_of_eat;
 	t_philo	*philo;
 	size_t	init_time;
+	int		a_philo_died;
 }	t_rules;
 
 int		main(int argc, char **argv);
