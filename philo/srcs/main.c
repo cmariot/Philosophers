@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 12:08:52 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 13:30:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ void	*new_thread(void *philo_add)
 		//Take the left fork
 		if (philo->rules->a_philo_died == 0)
 		{
-			if (pthread_mutex_lock(philo->left_fork))
-			{
-				pthread_mutex_lock(philo->rules->philo[philo->id - 1].right_fork);
-				timestamp = get_time() - philo->rules->init_time;
-				printf("%d %d has taken a fork\n", timestamp, philo->id);
-			}
+			timestamp = get_time() - philo->rules->init_time;
+			printf("%d %d has taken a fork\n", timestamp, philo->id);
 		}
 		//Take the right fork
 		if (philo->rules->a_philo_died == 0)
 		{
+			//if he has the left fork -> take the right fork
+			//else drop the left fork
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d has taken a fork\n", timestamp, philo->id);
 		}
 		//Eat (time_to_eat)
 		if (philo->rules->a_philo_died == 0)
 		{
+			//Check if the philosopher has 2 forks
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d is eating\n", timestamp, philo->id);
 			usleep(philo->rules->time_to_eat);
+			//Drop the 2 forks
 		}
 		//Sleep (time_to_sleep)
 		if (philo->rules->a_philo_died == 0)
@@ -74,7 +74,6 @@ void	*new_thread(void *philo_add)
 			philo->rules->a_philo_died = 1;
 		}
 	}
-	printf("EXIT\n");
 	return (NULL);
 }
 
