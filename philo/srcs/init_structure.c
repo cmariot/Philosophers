@@ -6,12 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 13:26:07 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 14:12:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
+//Get the time in seconds and microseconds since midnight (0 hour), January 1, 1970.
 size_t	get_time(void)
 {
 	struct timeval	time;
@@ -19,6 +20,7 @@ size_t	get_time(void)
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
+
 
 void	atou_errors(int ref, t_rules *rules)
 {
@@ -88,7 +90,7 @@ void	init_rules(t_rules *rules, char **argv, int argc)
 	if (argc == 6)
 		rules->min_number_of_eat = ft_atou(argv[5], rules);
 	else
-		rules->min_number_of_eat = 0;
+		rules->min_number_of_eat = -1;
 	rules->a_philo_died = 0;
 	if (rules->number_of_philosophers < 1)
 	{

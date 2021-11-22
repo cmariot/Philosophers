@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 13:30:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/22 14:16:41 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_alive(t_philo *philo)
 {
-	if (philo->is_alive == 1 || philo->rules->a_philo_died == 0)
+	if (philo->is_alive == 1 && philo->rules->a_philo_died == 0)
 		return (1);
 	else
 		return (0);
@@ -91,8 +91,8 @@ void	create_threads(t_rules *rules)
 	//Wait the end of the threads
 	i = 0;
 	while (i < rules->number_of_philosophers)
-		if (pthread_join(rules->philo[i++].philo_thread, NULL) == 0)
-			break ;
+		pthread_join(rules->philo[i++].philo_thread, NULL);
+	return ;
 }
 
 void *free_rules(t_rules **rules)
