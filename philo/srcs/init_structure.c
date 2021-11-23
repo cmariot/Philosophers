@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/23 07:06:29 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/23 14:46:52 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	init_philo(t_rules *rules)
 		rules->philo[i].id = i + 1;
 		rules->philo[i].rules = rules;
 		rules->philo[i].is_alive = 1;
+		pthread_mutex_init(&(rules->philo[i].left_fork), NULL);
+		pthread_mutex_init(&(rules->philo[i].right_fork), NULL);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/23 07:06:11 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/23 14:53:06 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	*new_thread(void *philo_add)
 		if (philo->id == 1)
 		{
 			usleep(1000000);
+			philo->rules->dead = 1;
+			usleep(1);
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d died\n", timestamp, philo->id);
-			philo->is_alive = 0;
-			philo->rules->dead = 1;
 		}
 	}
 	return (NULL);
@@ -97,6 +97,15 @@ void	create_threads(t_rules *rules)
 
 void *free_rules(t_rules **rules)
 {
+	int i;
+
+	i = 0;
+	while (i < (*rules)->number_of_philosophers)
+	{
+		pthread_mutex_destroy(&((*rules)->philo[i].left_fork));
+		pthread_mutex_destroy(&((*rules)->philo[i].right_fork));
+		i++;
+	}
 	free((*rules)->philo);
 	(*rules)->philo = NULL;
 	free(*rules);
