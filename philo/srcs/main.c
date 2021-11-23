@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 14:16:41 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/23 07:06:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_alive(t_philo *philo)
 {
-	if (philo->is_alive == 1 && philo->rules->a_philo_died == 0)
+	if (philo->rules->dead == 0)
 		return (1);
 	else
 		return (0);
@@ -30,13 +30,13 @@ void	*new_thread(void *philo_add)
 	while (is_alive(philo))
 	{
 		//Take the left fork
-		if (philo->rules->a_philo_died == 0)
+		if (philo->rules->dead == 0)
 		{
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d has taken a fork\n", timestamp, philo->id);
 		}
 		//Take the right fork
-		if (philo->rules->a_philo_died == 0)
+		if (philo->rules->dead == 0)
 		{
 			//if he has the left fork -> take the right fork
 			//else drop the left fork
@@ -44,7 +44,7 @@ void	*new_thread(void *philo_add)
 			printf("%d %d has taken a fork\n", timestamp, philo->id);
 		}
 		//Eat (time_to_eat)
-		if (philo->rules->a_philo_died == 0)
+		if (philo->rules->dead == 0)
 		{
 			//Check if the philosopher has 2 forks
 			timestamp = get_time() - philo->rules->init_time;
@@ -53,14 +53,14 @@ void	*new_thread(void *philo_add)
 			//Drop the 2 forks
 		}
 		//Sleep (time_to_sleep)
-		if (philo->rules->a_philo_died == 0)
+		if (philo->rules->dead == 0)
 		{
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d is sleeping\n", timestamp, philo->id);
 			usleep(philo->rules->time_to_sleep);
 		}
 		//Think
-		if (philo->rules->a_philo_died == 0)
+		if (philo->rules->dead == 0)
 		{
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d is thinking\n", timestamp, philo->id);
@@ -71,7 +71,7 @@ void	*new_thread(void *philo_add)
 			timestamp = get_time() - philo->rules->init_time;
 			printf("%d %d died\n", timestamp, philo->id);
 			philo->is_alive = 0;
-			philo->rules->a_philo_died = 1;
+			philo->rules->dead = 1;
 		}
 	}
 	return (NULL);

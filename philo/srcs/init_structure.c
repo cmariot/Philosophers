@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 14:12:38 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/23 07:06:29 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	init_philo(t_rules *rules)
 void	init_rules(t_rules *rules, char **argv, int argc)
 {
 	rules->number_of_philosophers = ft_atou(argv[1], rules);
-	rules->number_of_forks = rules->number_of_philosophers;
 	rules->time_to_die = ft_atou(argv[2], rules);
 	rules->time_to_eat = ft_atou(argv[3], rules);
 	rules->time_to_sleep = ft_atou(argv[4], rules);
@@ -91,7 +90,7 @@ void	init_rules(t_rules *rules, char **argv, int argc)
 		rules->min_number_of_eat = ft_atou(argv[5], rules);
 	else
 		rules->min_number_of_eat = -1;
-	rules->a_philo_died = 0;
+	rules->dead = 0;
 	if (rules->number_of_philosophers < 1)
 	{
 		printf("Error, not enought philosophers\n");

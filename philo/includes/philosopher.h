@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/22 12:05:41 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/23 07:05:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ typedef struct s_philo {
 
 typedef struct s_rules {
 	int		number_of_philosophers;
-	int		number_of_forks;
 	int		time_to_die;
 	int		time_to_eat;
 	int		time_to_sleep;
 	int		min_number_of_eat;
 	t_philo	*philo;
 	size_t	init_time;
-	int		a_philo_died;
+	int		dead;
 }	t_rules;
 
 int		main(int argc, char **argv);
