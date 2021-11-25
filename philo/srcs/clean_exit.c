@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_mutex.c                                       :+:      :+:    :+:   */
+/*   clean_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 07:19:33 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/23 14:45:00 by cmariot          ###   ########.fr       */
+/*   Created: 2021/11/25 14:03:02 by cmariot           #+#    #+#             */
+/*   Updated: 2021/11/25 18:35:59 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
+#include "philosopher.h"
 
-int	pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr);
-
-int	main(void)
+void	clean_exit(t_rules *rules, pthread_t *thread_id)
 {
-	pthread_mutex_t mutex;
+	int	i;
 
-	pthread_mutex_init(&mutex, NULL);
-	return (0);
+	i = 0;
+	while (i < rules->nb_philo)
+	{
+		pthread_mutex_destroy(&rules->philo[i].fork);
+		i++;
+	}
+	pthread_mutex_destroy(&rules->print);
+	pthread_mutex_destroy(&rules->check);
+	free(rules->philo);
+	if (thread_id)
+		free(thread_id);
 }

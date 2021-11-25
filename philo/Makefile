@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/11/22 11:45:01 by cmariot          ###   ########.fr        #
+#    Updated: 2021/11/25 17:43:31 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,12 @@ endif
 # **************************************************************************** #
 
 SRCS			= main.c \
-				  init_structure.c
+				  init_rules.c \
+				  create_threads.c \
+				  routine.c \
+				  print_status.c \
+				  check_dead.c \
+				  clean_exit.c
 
 SRC				:= $(notdir $(SRCS))
 

@@ -6,135 +6,33 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/23 14:53:06 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/25 15:16:25 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-int	is_alive(t_philo *philo)
+/* Print an error message if the number of arguments isn't correct */
+int	usage(void)
 {
-	if (philo->rules->dead == 0)
-		return (1);
-	else
-		return (0);
+	printf("Usage : ./philo [nb_philo] ");
+	printf("[t_die] [t_eat] [t_sleep] ");
+	printf("[optional : min_nb_of_eat]\n");
+	return (-1);
 }
 
-void	*new_thread(void *philo_add)
-{
-	t_philo *philo;
-	int	timestamp;
-
-	philo = (t_philo *)philo_add;
-	printf("Philosopher created, his ID is %d\n", philo->id);
-	while (is_alive(philo))
-	{
-		//Take the left fork
-		if (philo->rules->dead == 0)
-		{
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d has taken a fork\n", timestamp, philo->id);
-		}
-		//Take the right fork
-		if (philo->rules->dead == 0)
-		{
-			//if he has the left fork -> take the right fork
-			//else drop the left fork
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d has taken a fork\n", timestamp, philo->id);
-		}
-		//Eat (time_to_eat)
-		if (philo->rules->dead == 0)
-		{
-			//Check if the philosopher has 2 forks
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d is eating\n", timestamp, philo->id);
-			usleep(philo->rules->time_to_eat);
-			//Drop the 2 forks
-		}
-		//Sleep (time_to_sleep)
-		if (philo->rules->dead == 0)
-		{
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d is sleeping\n", timestamp, philo->id);
-			usleep(philo->rules->time_to_sleep);
-		}
-		//Think
-		if (philo->rules->dead == 0)
-		{
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d is thinking\n", timestamp, philo->id);
-		}
-		if (philo->id == 1)
-		{
-			usleep(1000000);
-			philo->rules->dead = 1;
-			usleep(1);
-			timestamp = get_time() - philo->rules->init_time;
-			printf("%d %d died\n", timestamp, philo->id);
-		}
-	}
-	return (NULL);
-}
-
-void	create_threads(t_rules *rules)
-{
-	int	i;
-
-	//Create a thread for each philosopher
-	i = 0;
-	while (i < rules->number_of_philosophers)
-	{
-		pthread_create(&rules->philo[i].philo_thread, NULL, &new_thread, &rules->philo[i]);
-		i++;
-	}
-	//Wait the end of the threads
-	i = 0;
-	while (i < rules->number_of_philosophers)
-		pthread_join(rules->philo[i++].philo_thread, NULL);
-	return ;
-}
-
-void *free_rules(t_rules **rules)
-{
-	int i;
-
-	i = 0;
-	while (i < (*rules)->number_of_philosophers)
-	{
-		pthread_mutex_destroy(&((*rules)->philo[i].left_fork));
-		pthread_mutex_destroy(&((*rules)->philo[i].right_fork));
-		i++;
-	}
-	free((*rules)->philo);
-	(*rules)->philo = NULL;
-	free(*rules);
-	*rules = NULL;
-	return (NULL);
-}
-
+/*	The philo program takes 4 (the 5th is optional) arguments :
+ *	./philo [nb_philo] [t_die] [t_eat] [t_sleep] [opt : min_nb_of_eat] */
 int	main(int argc, char **argv)
 {
-	t_rules	*rules;
+	t_rules	rules;
 
-	if (argc == 5 || argc == 6)
-	{
-		rules = malloc(sizeof(t_rules));
-		if (!rules)
-		{
-			printf("Error : Malloc rules in main()\n");
-			return (-1);
-		}
-		init_rules(rules, argv, argc);
-		create_threads(rules);
-		free_rules(&rules);
-		return (0);
-	}
+	if (argc < 5 || argc > 6)
+		return (usage());
 	else
 	{
-		printf("Usage : ./philo [number_of_philosophers] ");
-		printf("[time_to_die] [time_to_eat] [time_to_sleep] ");
-		printf("[optional : number_of_times_each_philosopher_must_eat]\n");
-		return (-1);
+		init_rules(&rules, argv, argc);
+		create_threads(&rules);
+		return (0);
 	}
 }
