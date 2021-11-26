@@ -1,0 +1,22 @@
+// A Philosopher Visualizer -> paste the output to see the philosophers life
+https://nafuka11.github.io/philosophers-visualizer/
+
+// Parsing errors :
+	// Not enough arguments
+		./philo
+		./philo 5
+	// Too much arguments
+		./philo 5 600 100 100 100 100
+	// Invalid arguments : 0, negative, text, > MAX INT
+		./philo 0 600 100 100 100
+		./philo 5 -600 100 100 100
+		./philo 5 600 lol 100 100
+		./philo 5 1000000000000 100 100 100
+
+// Only one philosopher -> 1 fork -> must die after time_to_die
+	./philo 1 100 100 100 100
+
+// If the time_to_eat + time_to_sleep is too big compared to time_to_die
+	./philo 3 300 200 200
+
+

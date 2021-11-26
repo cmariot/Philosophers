@@ -6,33 +6,29 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/25 15:16:25 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/26 19:04:23 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-/* Print an error message if the number of arguments isn't correct */
-int	usage(void)
-{
-	printf("Usage : ./philo [nb_philo] ");
-	printf("[t_die] [t_eat] [t_sleep] ");
-	printf("[optional : min_nb_of_eat]\n");
-	return (-1);
-}
-
 /*	The philo program takes 4 (the 5th is optional) arguments :
- *	./philo [nb_philo] [t_die] [t_eat] [t_sleep] [opt : min_nb_of_eat] */
+ *	./philo [nb_philo] [t_die] [t_eat] [t_sleep] [opt : max_nb_of_eat] */
 int	main(int argc, char **argv)
 {
 	t_rules	rules;
 
-	if (argc < 5 || argc > 6)
-		return (usage());
+	if (argc == 5 || argc == 6)
+	{
+		if (init_rules(&rules, argv, argc))
+			create_threads(&rules);
+		return (0);
+	}
 	else
 	{
-		init_rules(&rules, argv, argc);
-		create_threads(&rules);
-		return (0);
+		print_error("Usage : ./philo [nb_philo] ");
+		print_error("[t_die] [t_eat] [t_sleep] ");
+		print_error("[optional : max_nb_of_eat]\n");
+		return (-1);
 	}
 }
