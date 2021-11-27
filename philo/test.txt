@@ -19,4 +19,12 @@ https://nafuka11.github.io/philosophers-visualizer/
 // If the time_to_eat + time_to_sleep is too big compared to time_to_die
 	./philo 3 300 200 200
 
+// Infinite sinulation with 2 philosophers :
+	./philo 2 200 100 100
 
+// Test of the last argument : The 2 philosophers will stop after 2 meals
+	./philo 2 200 100 100 2
+
+// With 3 philosophers : 
+	./philo 3 200 100 100	-> die
+	./philo 3 300 100 100	-> infinite

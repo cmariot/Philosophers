@@ -6,12 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:45:49 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/26 20:06:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/27 16:40:19 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
+// A custom usleep function
 void	go_to_sleep(t_rules *rules, size_t time)
 {
 	size_t	start_time;
@@ -24,6 +25,8 @@ void	go_to_sleep(t_rules *rules, size_t time)
 	return ;
 }
 
+// Take the forks when they are available and wait t_to_eat,
+// Print status and use mutex
 void	eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);

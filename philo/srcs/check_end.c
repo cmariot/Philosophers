@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:41:21 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/26 22:28:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/27 16:22:51 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,16 @@ void	check_eat(t_rules *rules)
 // or when everybody has eaten number_of_times_each_philosopher_must_eat
 void	check_end(t_rules *rules)
 {
-	while (!rules->everybody_eat && !rules->dead)
+	while (1)
 	{
 		check_dead(rules);
 		if (rules->dead)
 			break ;
 		if (rules->must_eat != -1)
+		{
 			check_eat(rules);
+			if (rules->everybody_eat == 1)
+				break ;
+		}
 	}
 }

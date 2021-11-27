@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:16:11 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/26 22:19:29 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/27 16:35:35 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	create_threads(t_rules *rules)
 
 	thread_id = malloc(sizeof(pthread_t) * rules->nb_philo);
 	if (!thread_id)
-		return (print_error("Error, malloc in create_threads() failed\n"));
+		return (print_error("Error, malloc in create_threads failed\n"));
 	rules->init_time = get_time();
 	i = 0;
 	while (i < rules->nb_philo)
