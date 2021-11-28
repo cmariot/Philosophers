@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:03:02 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/26 17:01:14 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/28 15:16:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ void	clean_exit(t_rules *rules, pthread_t *thread_id)
 	pthread_mutex_destroy(&rules->check_dead);
 	pthread_mutex_destroy(&rules->print_status);
 	free(rules->philo);
+	rules->philo = NULL;
 	if (thread_id)
+	{
 		free(thread_id);
+		thread_id = NULL;
+	}
 	return ;
 }

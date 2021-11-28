@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/27 16:34:40 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/28 15:01:16 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SLEEP 3
 # define THINK 4
 # define DIED 5
+# define THREAD_FAILED 6
 
 typedef struct s_philo {
 	int				id;

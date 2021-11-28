@@ -12,19 +12,21 @@ https://nafuka11.github.io/philosophers-visualizer/
 		./philo 5 -600 100 100 100
 		./philo 5 600 lol 100 100
 		./philo 5 1000000000000 100 100 100
+	// Want to create too much threads
+		./philo 4200 800 100 100
 
 // Only one philosopher -> 1 fork -> must die after time_to_die
-	./philo 1 100 100 100 100
+	./philo 1 100 100 100 100	-> die
 
 // If the time_to_eat + time_to_sleep is too big compared to time_to_die
-	./philo 3 300 200 200
+	./philo 3 300 200 200		-> die
 
 // Infinite sinulation with 2 philosophers :
-	./philo 2 200 100 100
+	./philo 2 200 100 100		-> infinite
 
 // Test of the last argument : The 2 philosophers will stop after 2 meals
-	./philo 2 200 100 100 2
+	./philo 2 200 100 100 2		-> no die
 
 // With 3 philosophers : 
-	./philo 3 200 100 100	-> die
-	./philo 3 300 100 100	-> infinite
+	./philo 3 200 100 100		-> die
+	./philo 3 300 100 100		-> infinite

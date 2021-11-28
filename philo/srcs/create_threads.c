@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:16:11 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/27 16:35:35 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/28 15:12:05 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ int	create_threads(t_rules *rules)
 	while (i < rules->nb_philo)
 	{
 		if (pthread_create(&thread_id[i], NULL, &routine, &rules->philo[i]))
-			return (print_error("Error, pthread_create() failed\n"));
+		{
+			print_status(&rules->philo[0], THREAD_FAILED);
+			clean_exit(rules, thread_id);
+			return (1);
+		}
 		rules->philo[i].last_meal = get_time();
 		i++;
 	}
