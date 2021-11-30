@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:45:49 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/27 16:40:19 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 10:49:29 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_status(philo, FORK);
+	print_status(philo, EAT);
 	pthread_mutex_lock(&philo->rules->check_dead);
 	philo->last_meal = get_time();
 	philo->eat_counter++;
 	pthread_mutex_unlock(&philo->rules->check_dead);
-	print_status(philo, EAT);
 	go_to_sleep(philo->rules, philo->rules->t_eat);
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->r_philo->fork);

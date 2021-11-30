@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/11/26 22:20:30 by cmariot          ###   ########.fr        #
+#    Updated: 2021/11/30 13:09:48 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,18 +78,21 @@ RC	= \033[0m
 all : $(NAME)
 
 # Compiling
+srcs_compil :
+		@printf "$(YE)Source code compilation ... \n$(RC)"
+
 $(OBJS_DIR)%.o : %.c
 		@mkdir -p $(OBJS_DIR)
 		@$(CC) $(CFLAGS) -pthread -c $< -o $@
 		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
-
-srcs_compil :
-		@printf "$(YE)Source code compilation ... \n$(RC)"
-			
+		
 # Linking
-$(NAME)	: srcs_compil $(SRCS) $(OBJS)
+#
+obj_link :
 		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
 		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(LIB_LFLAGS) $(RC)\n"
+
+$(NAME)	: srcs_compil $(SRCS) $(OBJS) obj_link
 		@$(CC) $(LFLAGS) $(OBJS) -pthread -o $(NAME)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
 
