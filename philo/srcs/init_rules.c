@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 11:26:47 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:40:42 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,17 +80,17 @@ int	init_rules(t_rules *rules, char **argv, int argc)
 		rules->must_eat = atou(argv[5]);
 	else
 		rules->must_eat = -1;
-	if (rules->nb_philo <= 0 || rules->nb_philo > 20000 || rules->t_die <= 0
-		|| rules->t_eat <= 0 || rules->t_sleep <= 0
+	if (rules->nb_philo <= 0 || rules->nb_philo > 10000
+		|| rules->t_eat <= 0 || rules->t_sleep <= 0 || rules->t_die <= 0
 		|| rules->must_eat == 0 || rules->must_eat < -1)
 	{
-		if (rules->nb_philo > 20000)
-			print_error("Too much philosophers ...\n");
+		if (rules->nb_philo > 10000)
+			print_error("Error, max number of philosopher is 10.000\n");
 		else
-			print_error("Error, invalid argument(s), must be > 0 and <= INT_MAX.\n");
+			print_error("Error, arguments must be > 0 and <= INT_MAX.\n");
 		return (0);
 	}
-	rules->everybody_eat = 0;
+	rules->everybody_ate = 0;
 	rules->dead = 0;
 	pthread_mutex_init(&rules->print_status, NULL);
 	pthread_mutex_init(&rules->check_dead, NULL);

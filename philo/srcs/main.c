@@ -6,14 +6,15 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/27 16:36:48 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:28:06 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-/*	The philo program takes 4 (the 5th is optional) arguments :
- *	./philo [nb_philo] [t_die] [t_eat] [t_sleep] [opt : max_nb_of_eat] */
+// The philo program takes 4 (the 5th is optional) arguments :
+// ./philo [nb_philo] [t_die] [t_eat] [t_sleep]
+// [optional : number_of_times_each_philosopher_must_eat]
 int	main(int argc, char **argv)
 {
 	t_rules	rules;
@@ -28,7 +29,7 @@ int	main(int argc, char **argv)
 	{
 		print_error("Usage : ./philo [nb_philo] ");
 		print_error("[t_die] [t_eat] [t_sleep] ");
-		print_error("[optional : max_nb_of_eat]\n");
+		print_error("[optional : must_eat]\n");
 		return (-1);
 	}
 }

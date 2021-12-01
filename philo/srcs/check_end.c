@@ -6,11 +6,30 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:41:21 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/27 16:22:51 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:41:48 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
+
+// Compare the number of time each philosopher ate with
+// number_of_times_each_philosopher_must_eat
+void	check_eat(t_rules *rules)
+{
+	int	philosophers_who_have_all_eat;
+	int	i;
+
+	i = 0;
+	philosophers_who_have_all_eat = 0;
+	while (i < rules->nb_philo)
+	{
+		if (rules->philo[i].eat_counter == rules->must_eat)
+			philosophers_who_have_all_eat++;
+		i++;
+	}
+	if (philosophers_who_have_all_eat == rules->nb_philo)
+		rules->everybody_ate = 1;
+}
 
 // If a philosopher don't eat after time_to_die, he'll die.
 void	check_dead(t_rules *rules)
@@ -33,25 +52,6 @@ void	check_dead(t_rules *rules)
 	}
 }
 
-// Compare the number of time each philosopher ate with
-// number_of_times_each_philosopher_must_eat
-void	check_eat(t_rules *rules)
-{
-	int	philosophers_who_have_all_eat;
-	int	i;
-
-	i = 0;
-	philosophers_who_have_all_eat = 0;
-	while (i < rules->nb_philo)
-	{
-		if (rules->philo[i].eat_counter == rules->must_eat)
-			philosophers_who_have_all_eat++;
-		i++;
-	}
-	if (philosophers_who_have_all_eat == rules->nb_philo)
-		rules->everybody_eat = 1;
-}
-
 // Loop ends when there is a dead,
 // or when everybody has eaten number_of_times_each_philosopher_must_eat
 void	check_end(t_rules *rules)
@@ -59,12 +59,12 @@ void	check_end(t_rules *rules)
 	while (1)
 	{
 		check_dead(rules);
-		if (rules->dead)
+		if (rules->dead == 1)
 			break ;
 		if (rules->must_eat != -1)
 		{
 			check_eat(rules);
-			if (rules->everybody_eat == 1)
+			if (rules->everybody_ate == 1)
 				break ;
 		}
 	}

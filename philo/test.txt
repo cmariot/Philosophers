@@ -30,3 +30,13 @@ https://nafuka11.github.io/philosophers-visualizer/
 // With 3 philosophers : 
 	./philo 3 200 100 100		-> die
 	./philo 3 300 100 100		-> infinite
+
+// With 100 philosophers :
+	./philo 100 300 100 100		-> infinite
+	./philo 100 300 100 100	1	-> stop when all philosophers eat at least 1 time
+	./philo 100 400 200 100		-> a philo will die
+
+// With 200 philosophers :
+	./philo 200 300 100 100		-> infinite
+	./philo 200 300 100 100	1	-> stop when all philosophers eat at least 1 time
+	./philo 200 400 200 100		-> a philo will die

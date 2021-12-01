@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/28 15:01:16 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:40:27 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_rules {
 	int				t_eat;
 	int				t_sleep;
 	int				must_eat;
-	int				everybody_eat;
+	int				everybody_ate;
 	int				dead;
 	size_t			init_time;
 	pthread_mutex_t	print_status;

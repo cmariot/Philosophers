@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:44:45 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/28 15:07:59 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/11/30 14:40:52 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	print_status(t_philo *philo, int status)
 	pthread_mutex_lock(&philo->rules->print_status);
 	if (status == THREAD_FAILED)
 		print_error("Error, pthread_create() failed\n");
-	else if (!philo->rules->dead && !philo->rules->everybody_eat)
+	else if (!philo->rules->dead && !philo->rules->everybody_ate)
 	{
 		timestamp = get_time() - philo->rules->init_time;
 		printf("%lu %d ", timestamp, philo->id);
