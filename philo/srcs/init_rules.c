@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 12:03:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	init_philo(t_rules *rules)
 	rules->philo = malloc(sizeof(t_philo) * rules->nb_philo);
 	if (!rules->philo)
 	{
-		print_error("Error, during the malloc of rules->philo\n");
+		print_fd("Error, during the malloc of rules->philo\n", 2);
 		return (-1);
 	}
 	i = 0;
@@ -85,9 +85,9 @@ int	init_rules(t_rules *rules, char **argv, int argc)
 		|| rules->must_eat == 0 || rules->must_eat < -1)
 	{
 		if (rules->nb_philo > 10000)
-			print_error("Error, max number of philosopher is 10.000\n");
+			print_fd("Error, max number of philosopher is 10.000\n", 2);
 		else
-			print_error("Error, arguments must be > 0 and <= INT_MAX.\n");
+			print_fd("Error, arguments must be > 0 and <= INT_MAX.\n", 2);
 		return (0);
 	}
 	rules->everybody_ate = 0;

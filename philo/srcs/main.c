@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:04:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 14:28:06 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 12:03:14 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		print_error("Usage : ./philo [nb_philo] ");
-		print_error("[t_die] [t_eat] [t_sleep] ");
-		print_error("[optional : must_eat]\n");
+		print_fd("Usage : ./philo [nb_philo] ", 2);
+		print_fd("[t_die] [t_eat] [t_sleep] ", 2);
+		print_fd("[optional : must_eat]\n", 2);
 		return (-1);
 	}
 }

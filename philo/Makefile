@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/11/30 13:09:48 by cmariot          ###   ########.fr        #
+#    Updated: 2021/12/01 11:16:57 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,11 @@ OBJS_DIR		= objs/
 CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			+= -O3
 CFLAGS			+= -I $(INCL_DIR)
 
 LFLAGS			= -Wall -Wextra -Werror
+LFLAGS			= -O3
 
 # Debug flag, use with 'make DEBUG=1'
 ifeq ($(DEBUG), 1)

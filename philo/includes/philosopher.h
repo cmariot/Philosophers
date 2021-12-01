@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:27 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 12:01:28 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ void			wait_threads(pthread_t *thread_id, t_rules *rules);
 
 //in the file routine.c
 void			*routine(void *add);
+void			eat(t_philo *philo);
+void			go_to_sleep(t_rules *rules, size_t time);
 
 // in the file print_status.c
 void			print_status(t_philo *philo, int status);
-int				print_error(char *str);
+int				print_fd(char *str, int fd);
 
 // in the file check_end.c
 void			check_end(t_rules *rules);

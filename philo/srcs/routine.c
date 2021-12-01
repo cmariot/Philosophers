@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:45:49 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 14:41:04 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 12:35:45 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,13 @@ void	go_to_sleep(t_rules *rules, size_t time)
 {
 	size_t	start_time;
 
-	start_time = get_time();
-	while (!rules->dead && (get_time() - start_time < time))
+	if (rules->dead == 0)
 	{
-		usleep(100);
+		start_time = get_time();
+		while (get_time() - start_time < time)
+		{
+			usleep(100);
+		}
 	}
 	return ;
 }

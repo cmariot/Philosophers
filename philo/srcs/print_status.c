@@ -6,20 +6,43 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:44:45 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/30 14:40:52 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 12:13:44 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosopher.h"
 
-// Print str on STDERR
-int	print_error(char *str)
+// Print a string on the file descriptor fd
+int	print_fd(char *str, int fd)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
-		write(2, &str[i++], 1);
+		if (write(fd, &str[i++], 1) == -1)
+			return (-1);
+	return (i);
+}
+
+// Print an integer on STDOUT
+int	ft_putnbr(int n)
+{
+	long int	nb;
+	char		*base_dec;
+	int			i;
+
+	nb = n;
+	base_dec = "0123456789";
+	i = 0;
+	if ((nb >= 0) && (nb <= 9))
+	{
+		i = write(1, &base_dec[nb], 1);
+	}
+	else
+	{
+		ft_putnbr(nb / 10);
+		i = write(1, &base_dec[nb % 10], 1);
+	}
 	return (i);
 }
 
@@ -31,22 +54,23 @@ void	print_status(t_philo *philo, int status)
 
 	pthread_mutex_lock(&philo->rules->print_status);
 	if (status == THREAD_FAILED)
-		print_error("Error, pthread_create() failed\n");
+		print_fd("Error, pthread_create() failed\n", 2);
 	else if (!philo->rules->dead && !philo->rules->everybody_ate)
 	{
 		timestamp = get_time() - philo->rules->init_time;
-		printf("%lu %d ", timestamp, philo->id);
+		ft_putnbr(timestamp);
+		print_fd(" ", 1);
+		ft_putnbr(philo->id);
 		if (status == FORK)
-			printf("has taken a fork\n");
+			print_fd(" has taken a fork\n", 1);
 		else if (status == EAT)
-			printf("is eating\n");
+			print_fd(" is eating\n", 1);
 		else if (status == SLEEP)
-			printf("is sleeping\n");
+			print_fd(" is sleeping\n", 1);
 		else if (status == THINK)
-			printf("is thinking\n");
+			print_fd(" is thinking\n", 1);
 		else if (status == DIED)
-			printf("died\n");
+			print_fd(" died\n", 1);
 	}
 	pthread_mutex_unlock(&philo->rules->print_status);
-	return ;
 }
