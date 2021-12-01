@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:41:21 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 14:36:57 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 15:05:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	check_dead(t_rules *rules)
 	while (i < rules->nb_philo)
 	{
 		pthread_mutex_lock(&rules->check_dead);
-		if (get_time() - rules->philo[i].last_meal > (size_t)rules->t_die)
+		if (get_time() > rules->philo[i].last_meal + (size_t)rules->t_die)
 		{
 			print_status(&rules->philo[i], DIED);
 			rules->dead = 1;
