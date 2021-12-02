@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:44:45 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/02 13:53:00 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 15:01:40 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_putnbr(int n)
 void	print_timestamp(t_philo *philo)
 {
 	size_t	timestamp;
-	
+
 	timestamp = get_time() - philo->rules->init_time;
 	ft_putnbr(timestamp);
 	write(1, " ", 1);
@@ -65,7 +65,7 @@ void	print_status(t_philo *philo, int status)
 		write(2, "Error, pthread_create() failed\n", 31);
 	else if (!philo->rules->dead && !philo->rules->everybody_ate)
 	{
-		print_timestamp(philo);	
+		print_timestamp(philo);
 		if (status == FORK && !philo->rules->dead)
 			write(1, " has taken a fork\n", 18);
 		else if (status == EAT && !philo->rules->dead)
