@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 11:08:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 12:03:49 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 08:37:14 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int	init_rules(t_rules *rules, char **argv, int argc)
 		|| rules->must_eat == 0 || rules->must_eat < -1)
 	{
 		if (rules->nb_philo > 10000)
-			print_fd("Error, max number of philosopher is 10.000\n", 2);
+			print_fd("Error, too much philosophers.\n", 2);
 		else
 			print_fd("Error, arguments must be > 0 and <= INT_MAX.\n", 2);
 		return (0);

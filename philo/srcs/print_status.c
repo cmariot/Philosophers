@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:44:45 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 15:19:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 16:56:07 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ void	print_status(t_philo *philo, int status)
 		ft_putnbr(timestamp);
 		print_fd(" ", 1);
 		ft_putnbr(philo->id);
-		if (status == FORK)
+		if (status == FORK && !philo->rules->dead)
 			print_fd(" has taken a fork\n", 1);
-		else if (status == EAT)
+		else if (status == EAT && !philo->rules->dead)
 			print_fd(" is eating\n", 1);
-		else if (status == SLEEP)
+		else if (status == SLEEP && !philo->rules->dead)
 			print_fd(" is sleeping\n", 1);
-		else if (status == THINK)
+		else if (status == THINK && !philo->rules->dead)
 			print_fd(" is thinking\n", 1);
-		else if (status == DIED)
+		else if (status == DIED && !philo->rules->dead)
 			print_fd(" died\n", 1);
 	}
 	pthread_mutex_unlock(&philo->rules->print_status);

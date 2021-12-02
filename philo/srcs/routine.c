@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:45:49 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 15:14:34 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 08:48:24 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	*routine(void *add)
 
 	philo = (t_philo *)add;
 	if (philo->id % 2 == 0)
-	{
-		print_status(philo, THINK);
-		go_to_sleep(philo->rules, philo->rules->t_eat);
-	}
+		go_to_sleep(philo->rules, 100);
 	while (!philo->rules->dead && !philo->rules->everybody_ate)
 	{
 		eat(philo);

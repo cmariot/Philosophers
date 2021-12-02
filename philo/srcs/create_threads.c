@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:16:11 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 13:42:41 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 08:37:59 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	create_threads(t_rules *rules)
 		rules->philo[i].last_meal = get_time();
 		i++;
 	}
+	usleep(100);
 	check_end(rules);
 	wait_threads(thread_id, rules);
 	clean_exit(rules, thread_id);

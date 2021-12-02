@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 17:41:21 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 15:05:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/01 17:01:16 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ void	check_eat(t_rules *rules)
 	philosophers_who_have_all_eat = 0;
 	while (i < rules->nb_philo)
 	{
-		if (rules->philo[i].eat_counter == rules->must_eat)
+		pthread_mutex_lock(&rules->check_dead);
+		if (rules->philo[i].eat_counter >= rules->must_eat)
 			philosophers_who_have_all_eat++;
+		pthread_mutex_unlock(&rules->check_dead);
 		i++;
 	}
 	if (philosophers_who_have_all_eat == rules->nb_philo)
@@ -56,7 +58,7 @@ void	check_dead(t_rules *rules)
 // or when everybody has eaten number_of_times_each_philosopher_must_eat
 void	check_end(t_rules *rules)
 {
-	while (1)
+	while (!rules->dead || !rules->everybody_ate)
 	{
 		check_dead(rules);
 		if (rules->dead == 1)

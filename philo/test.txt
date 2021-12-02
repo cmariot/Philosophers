@@ -22,18 +22,18 @@ https://nafuka11.github.io/philosophers-visualizer/
 	./philo 3 300 200 200		-> die
 
 // Infinite sinulation with 2 philosophers :
-	./philo 2 200 100 100		-> infinite
+	./philo 2 210 100 100		-> infinite
 
 // Test of the last argument : The 2 philosophers will stop after 2 meals
-	./philo 2 200 100 100 2		-> no die
+	./philo 2 210 100 100 2		-> no die, stop after 2 meals
 
 // With 3 philosophers : 
-	./philo 3 200 100 100		-> die
+	./philo 3 210 100 100		-> die
 	./philo 3 300 100 100		-> infinite
 
 // With 100 philosophers :
-	./philo 100 300 100 100		-> infinite
-	./philo 100 300 100 100	1	-> stop when all philosophers eat at least 1 time
+	./philo 100 400 100 100		-> infinite
+	./philo 100 400 100 100	1	-> stop when all philosophers eat at least 1 time
 	./philo 100 400 200 100		-> a philo will die
 
 // With 200 philosophers :
