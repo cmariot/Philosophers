@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/12/01 15:07:48 by cmariot          ###   ########.fr        #
+#    Updated: 2021/12/02 11:26:18 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ OBJS_DIR		= objs/
 CC				= gcc
 
 CFLAGS			= -Wall -Wextra -Werror
-CFLAGS			+= -O3
 CFLAGS			+= -I $(INCL_DIR)
 
 LFLAGS			= -Wall -Wextra -Werror

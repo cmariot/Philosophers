@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:45:49 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/02 08:48:24 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 13:22:31 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	go_to_sleep(t_rules *rules, size_t time)
 {
 	size_t	start_time;
 
-	if (rules->dead == 0)
+	if (!rules->dead && !rules->everybody_ate)
 	{
 		start_time = get_time();
-		while (get_time() - start_time < time)
+		while (get_time() < start_time + time)
 		{
-			usleep(100);
+			usleep(500);
 		}
 	}
 	return ;
@@ -45,10 +45,6 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->r_philo->fork);
 	print_status(philo, FORK);
 	print_status(philo, EAT);
-	pthread_mutex_lock(&philo->rules->check_dead);
-	philo->last_meal = get_time();
-	philo->eat_counter++;
-	pthread_mutex_unlock(&philo->rules->check_dead);
 	go_to_sleep(philo->rules, philo->rules->t_eat);
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->r_philo->fork);

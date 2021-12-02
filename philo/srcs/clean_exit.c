@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:03:02 by cmariot           #+#    #+#             */
-/*   Updated: 2021/11/28 15:16:11 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 14:04:25 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ void	clean_exit(t_rules *rules, pthread_t *thread_id)
 		free(thread_id);
 		thread_id = NULL;
 	}
+	usleep(1000);
 	return ;
 }

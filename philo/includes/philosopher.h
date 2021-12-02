@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/16 14:08:16 by cmariot           #+#    #+#             */
-/*   Updated: 2021/12/01 12:01:28 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/12/02 10:39:41 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,8 @@ int				print_fd(char *str, int fd);
 
 // in the file check_end.c
 void			check_end(t_rules *rules);
-void			check_dead(t_rules *rules);
-void			check_eat(t_rules *rules);
+int				check_dead(t_rules *rules);
+int				check_eat(t_rules *rules);
 
 // in the file clean_exit.c
 void			clean_exit(t_rules *rules, pthread_t *thread_id);
